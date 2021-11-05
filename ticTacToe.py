@@ -1,5 +1,6 @@
 # tic tac toe - now with 2x the protein
 
+# module used for bot movements
 import random
 
 """
@@ -30,7 +31,7 @@ Board Layout:
 7|8|9
 
 """)
-    
+
     print(gameBoard['1'] + '|' + gameBoard['2'] + '|' + gameBoard['3'])
     print("------")
     print(gameBoard['4'] + '|' + gameBoard['5'] + '|' + gameBoard['6'])
@@ -92,7 +93,11 @@ def oTurn():
 # randomly chooses an empty box
 def easyCompMove():
     while True:
+
+        # create rand integer
         easyCompAttempt = random.randint(1, 10)
+
+        # check if spot is taken
         if gameBoard[str(easyCompAttempt)] == ' ':
             gameBoard[str(easyCompAttempt)] = "O"
             return
@@ -150,31 +155,32 @@ def drawCheck():
         return True
 
 
+# main function that calls all other functions
 def ticTacToe():
 
-    # init variables
     print("Welcome to Tic-Tac-Toe!\n\n")
     print("Enter 'q' or 'quit' at any time to quit.")
 
-    while True:
-        gamemode = input("""
-How would you like to play?
-1.) Player v. Player
-2.) Easy Bot       
-""")
-        if gamemode == '1' or '2':
-            break
-        elif gamemode == 'q' or 'quit':
-            return
-        else:
-            print("That's not a valid input.")
-
+    # init variables
     moveCount = 0
     turn = "X"
     win = False
 
     # creating two loops for the ability to replay
     while True:
+
+        while True:
+            gamemode = input("""
+How would you like to play?
+1.) Player v. Player
+2.) Easy Bot       
+""")
+            if gamemode == '1' or '2':
+                break
+            elif gamemode == 'q' or 'quit':
+                return
+            else:
+                print("That's not a valid input.")
 
         # game logic
         while True:
@@ -215,7 +221,7 @@ How would you like to play?
             if win:
                 clearScreen()
                 board()
-                print(f"Congratulations! {turn} has won.")
+                print(f"Congratulations! {turn} has won. They won in {moveCount} moves.")
                 break
 
             # switching sides
@@ -248,5 +254,4 @@ How would you like to play?
 ticTacToe()
 
 print("end")
-
 
